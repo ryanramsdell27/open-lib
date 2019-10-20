@@ -79,7 +79,6 @@ def event_transaction(verify_token):
         catalog.update_one({'item_id': item_id}, {'$set': {'status': STATUS_ON_LOAN, 'possession': borrower_id}})
 
         trans = Transaction(event_id, random.randint(1000, 9999), owner_id, borrower_id)
-        trans.zdumb = "SHITTTTT"
         pending_transactions.insert_one(trans.__dict__)
 
     elif event_type == EVENT_CANCEL:

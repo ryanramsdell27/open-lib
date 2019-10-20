@@ -3,6 +3,7 @@ from pprint import pprint
 import utils
 from utils import books, catalog
 
+STATUS_AVAILABLE = "available"
 
 class Book:
     def __init__(self, isbn):
@@ -43,15 +44,29 @@ def register_item(isbn, owner_id):
 
     catalog.insert_one(item)
 
+# if an item is available it is deleted from catalog
+def deregister_item(item_id):
+    item = catalog.find_one({'item_id': item_id})
+    if item.get('status') == STATUS_AVAILABLE:
+        catalog.delete_one({'item_id': item_id})
 
 # Clear the db
 # books.drop()
 # catalog.drop()
-
-# isbn_test = "9788373191723"
+#
+# # isbn_test = "9788373191723"
 # owner_id_test = 99383
-# register_item(isbn_test, owner_id_test)
 # for book in books.find():
-#     pprint(book)
-# for item in catalog.find():
-#     pprint(item)
+#     register_item(book.get('isbn'), owner_id_test)
+# # for book in books.find():
+# #     pprint(book)
+# book_id = books.find_one().get('_id')
+#
+# for item_test in catalog.find({'owner': owner_id_test, 'item_id': book_id}):
+#     pprint(item_test)
+#
+# deregister_item(book_id)
+# print('------------------------------------')
+# for item_test in catalog.find({'owner': owner_id_test, 'item_id': book_id}):
+#     pprint(item_test)
+

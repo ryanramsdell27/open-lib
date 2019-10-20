@@ -15,53 +15,56 @@
     </div>
 
     <div class="container-fluid">
-        {% for transaction in pending_codes %}
-        <div class="col-md-1">
-            <div class="card" style="width: 22rem;">
-                <div class="card-body">
-                    <table class="table table-borderless table-sm">
-                        <tbody>
-                        <tr>
-                            <td>Item</td>
-                            <td>{{transaction.item_title}}</td>
-                        </tr>
-                        <tr>
-                            <td>Transaction with</td>
-                            <td>{{transaction.code_recipient_name}}</td>
-                        </tr>
-                        <tr>
-                            <td>Verification code</td>
-                            <td>{{transaction.verification_code}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+        <div class="row">
+            {% for transaction in pending_codes %}
+            <div class="col-md-3">
+                <div class="card" style="width: 22rem;">
+                    <div class="card-body">
+                        <table class="table table-borderless table-sm">
+                            <tbody>
+                            <tr>
+                                <td>Item</td>
+                                <td>{{transaction.item_title}}</td>
+                            </tr>
+                            <tr>
+                                <td>Transaction with</td>
+                                <td>{{transaction.code_recipient_name}}</td>
+                            </tr>
+                            <tr>
+                                <td>Verification code</td>
+                                <td>{{transaction.verification_code}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-        {% endfor %}
-        {% for transaction in pending_verifies %}
-        <div class="col-md-1">
-            <div class="card" style="width: 22rem;">
-                <div class="card-body">
-                    <table class="table table-borderless table-sm">
-                        <tbody>
-                        <tr>
-                            <td>Item</td>
-                            <td>{{transaction.item_title}}</td>
-                        </tr>
-                        <tr>
-                            <td>Transaction with</td>
-                            <td>{{transaction.code_owner_name}}</td>
-                        </tr>
-                        <tr>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Enter verification code</button>
-                        </tr>
-                        </tbody>
-                    </table>
+            {% endfor %}
+            {% for transaction in pending_verifies %}
+            <div class="col-md-1">
+                <div class="card" style="width: 22rem;">
+                    <div class="card-body">
+                        <table class="table table-borderless table-sm">
+                            <tbody>
+                            <tr>
+                                <td>Item</td>
+                                <td>{{transaction.item_title}}</td>
+                            </tr>
+                            <tr>
+                                <td>Transaction with</td>
+                                <td>{{transaction.code_owner_name}}</td>
+                            </tr>
+                            <tr>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Enter verification code</button>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+            {% endfor %}
+
         </div>
-        {% endfor %}
     </div>
 
 

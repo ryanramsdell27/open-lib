@@ -13,6 +13,9 @@ pending_transactions = db.pending_transactions
 def get_books():
     return books.find()
 
+def get_pending_transactions():
+    return pending_transactions.find()
+
 def get_user_items(id):
     items = catalog.find({'owner': id})
     output = []

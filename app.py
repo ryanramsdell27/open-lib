@@ -40,7 +40,7 @@ def pending():
         resp.set_cookie('TOKEN', '', expires=0)
         return resp
 
-    return render_template("pending.html", current='pending')
+    return render_template("pending.html", pending_transactions=utils.get_pending_transactions(), current='pending')
 
 @app.route("/register-item")
 def registerItem():

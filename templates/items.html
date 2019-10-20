@@ -8,7 +8,7 @@
     {% extends "template.html" %}
     {% block content %}
     
-    <div class="row justify-content-md-center" style="margin-bottom:2em; margin-top: 2em">
+    <div class="row justify-content-md-center" style="margin-bottom:0.1em; margin-top: 2em">
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
             <form action="/register-item">
@@ -21,6 +21,7 @@
                 </div>
               </div>
             </form>
+
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -40,6 +41,22 @@
                 </div>
               </div>
             </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row justify-content-md-center" style="margin-bottom:2em; margin-top: 0.1em">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <form action="/unregister-item">
+              <div class="input-group mb-3">
+                <input type="text" name="isbn" class="form-control" placeholder="ISBN Number">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-danger">
+                      Unregister Book
+                    </button>
+                </div>
+              </div>
+            </form>
         </div>
         <div class="col-sm-2"></div>
     </div>

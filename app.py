@@ -82,6 +82,34 @@ def unregisterItem():
 
     return redirect('/items')
 
+@app.route("/verify")
+def verifyTransaction():
+    if request.cookies.get('TOKEN') == None:
+        return redirect('/register')
+    decoded = jwt.decode(request.cookies.get('TOKEN'), 'secret', algorithms=['HS256'])
+    if decoded == None:
+        resp = make_response(redirect('/register'))
+        resp.set_cookie('TOKEN', '', expires=0)
+        return resp
+
+    code = request.args.get("code")
+    if code == None:
+        return redirect('/pending')
+
+    return redirect('/items')
+
+@app.route("/cancel")
+def cancelTransaction():
+    if request.cookies.get('TOKEN') == None:
+        return redirect('/register')
+    decoded = jwt.decode(request.cookies.get('TOKEN'), 'secret', algorithms=['HS256'])
+    if decoded == None:
+        resp = make_response(redirect('/register'))
+        resp.set_cookie('TOKEN', '', expires=0)
+        return resp
+
+    return redirect('/pending')
+
 @app.route("/request")
 def requestItem():
     if request.cookies.get('TOKEN') == None:

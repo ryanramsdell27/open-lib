@@ -7,26 +7,54 @@
   <body>
     {% extends "template.html" %}
     {% block content %}
+    <div class="row justify-content-md-center" style="margin-bottom:2em; margin-top: 2em">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
 
     <div class="container-fluid">
-        {% for transaction in pending_transactions %}
+        {% for transaction in pending_codes %}
         <div class="col-md-1">
             <div class="card" style="width: 22rem;">
-                dumb
                 <div class="card-body">
                     <table class="table table-borderless table-sm">
                         <tbody>
                         <tr>
-                            <td>Borrower</td>
-                            <td>{{transaction.code_owner}}</td>
+                            <td>Item</td>
+                            <td>{{transaction.item_title}}</td>
                         </tr>
                         <tr>
-                            <td>ISBN</td>
-                            <td>1233456</td>
+                            <td>Transaction with</td>
+                            <td>{{transaction.code_recipient_name}}</td>
                         </tr>
                         <tr>
-                            <td>Due</td>
-                            <td>08-24-2020</td>
+                            <td>Verification code</td>
+                            <td>{{transaction.verification_code}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% for transaction in pending_verifies %}
+        <div class="col-md-1">
+            <div class="card" style="width: 22rem;">
+                <div class="card-body">
+                    <table class="table table-borderless table-sm">
+                        <tbody>
+                        <tr>
+                            <td>Item</td>
+                            <td>{{transaction.item_title}}</td>
+                        </tr>
+                        <tr>
+                            <td>Transaction with</td>
+                            <td>{{transaction.code_owner_name}}</td>
+                        </tr>
+                        <tr>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Enter verification code</button>
                         </tr>
                         </tbody>
                     </table>
@@ -35,83 +63,6 @@
         </div>
         {% endfor %}
     </div>
-    
-    <div class="row justify-content-md-center" style="margin-bottom:2em; margin-top: 2em">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-8">
-        </div>
-        <div class="col-sm-2"></div>
-    </div>
-
-    <div class="row justify-content-md-center">
-        <div class="col-md-2 col-sm"></div>
-        <div class="col-md-8 col-sm">
-          <div class="card" style="width: 22rem;">
-            <div class="card-body">
-                <div class="media">
-                    <img src="http://books.google.com/books/content?id=gu4JXBTxjhgC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api" class="mr-3" style="max-width: 4em">
-                    <div class="media-body">
-                        <h5 class="mt-0 card-title">The Overspent American</h5>
-                        Why we want what we don't need
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <table class="table table-borderless table-sm">
-                    <tbody>
-                    <tr>
-                        <td>Borrower</td>
-                        <td>Payton Garland</td>
-                    </tr>
-                    <tr>
-                        <td>ISBN</td>
-                        <td>1233456</td>
-                    </tr>
-                    <tr>
-                        <td>Due</td>
-                        <td>08-24-2020</td>
-                    </tr>
-                    </tbody>
-                </table>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Enter verification code</button>
-            </div>
-        </div>
-
-            <div class="card" style="width: 22rem;">
-                <div class="card-body">
-                    <div class="media">
-                        <img src="http://books.google.com/books/content?id=gu4JXBTxjhgC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api" class="mr-3" style="max-width: 4em">
-                        <div class="media-body">
-                            <h5 class="mt-0 card-title">The Overspent American</h5>
-                            Why we want what we don't need
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <table class="table table-borderless table-sm">
-                        <tbody>
-                        <tr>
-                            <td>Borrower</td>
-                            <td>Payton Garland</td>
-                        </tr>
-                        <tr>
-                            <td>ISBN</td>
-                            <td>1233456</td>
-                        </tr>
-                        <tr>
-                            <td>Due</td>
-                            <td>08-24-2020</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Enter verification code</button>
-                </div>
-            </div>
-
-        </div>
-        <div class="col-md-2 col-sm"></div>
-    </div>
-
 
 
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">

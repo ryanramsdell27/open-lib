@@ -75,7 +75,7 @@
                 </thead>
                 <tbody>
                     {% for book in books %}
-                    <tr class="clickable-row" data-toggle="modal" data-target=".bd-{{book.isbn}}-modal-lg">
+                    <tr>
                         <th scope="row">{{book.isbn}}</th>
                         <td>{{book.title}}</td>
                         <td>{{book.status}}</td>
@@ -87,63 +87,7 @@
             </table>
         </div>
         <div class="col-sm-2"></div>
-    </div>
-
-    {% for book in books %}
-    <div class="modal fade bd-{{book.isbn}}-modal-lg" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                <div class="media">
-                  <img src="{{book.image}}" class="mr-3" style="max-width: 4em">
-                  <div class="media-body">
-                    <h5 class="mt-0 card-title">{{book.title}}</h5>
-                    
-                  </div>
-                </div>
-                <div class="row justify-content-md-center">
-                  <div class="col-md-2 col-sm"></div>
-                  <div class="col-md-8 col-sm"> 
-                  <table class="table table-sm">
-                    <tbody>
-                      <tr>
-                        <td>Possession</td>
-                        <td>{{book.possession}}</td>
-                      </tr>
-                      <tr>
-                        <td>ISBN</td>
-                        <td>{{book.isbn}}</td>
-                      </tr>
-                      <tr>
-                        <td>Author</td>
-                        <td>{{book.author}}</td>
-                      </tr>
-                      <tr>
-                        <td>Publisher</td>
-                        <td>{{book.publisher}}</td>
-                      </tr>
-                      <tr>
-                        <td>Status</td>
-                        <td>{{book.status}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  </div>
-                  <div class="col-md-2 col-sm"></div>
-                </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary">Remove</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    {% endfor %}  
+    </div> 
       
     {% endblock %}
   </body>

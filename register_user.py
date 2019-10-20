@@ -33,11 +33,11 @@ class User:
 
 
 # users.drop()
-names = ["Payton", "Ryan", "Aiden", "Mike"]
-emails = ["pg@wisc.edu", "rr@wisc.edu", "as@wisc.edu", "mw@wisc.edu"]
-phones = [1, 2, 3, 4]
-for i in range(len(names)):
-    print(register_user(names[i], emails[i], phones[i]))
+# names = ["Payton", "Ryan", "Aiden", "Mike"]
+# emails = ["pg@wisc.edu", "rr@wisc.edu", "as@wisc.edu", "mw@wisc.edu"]
+# phones = [1, 2, 3, 4]
+# for i in range(len(names)):
+#     print(register_user(names[i], emails[i], phones[i]))
 
-for user in users.find():
-    pprint(user)
+# for user in users.find():
+#     pprint(user)

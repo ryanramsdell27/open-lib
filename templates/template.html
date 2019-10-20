@@ -11,20 +11,17 @@
   <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">lib</a>
+            <a class="navbar-brand mb-0 h1" href="#">lib</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                <li class="nav-item {% if current == 'home' %}active{% endif %}">
-                    <a class="nav-link {% if current == 'register' %}disabled{% endif %}" href="{{ url_for('home') }}">Home</a>
-                </li>
-                <li class="nav-item {% if current == 'about' %}active{% endif %}">
-                    <a class="nav-link {% if current == 'register' %}disabled{% endif %}" href="{{ url_for('about') }}">About</a>
-                </li>
                 <li class="nav-item {% if current == 'catalog' %}active{% endif %}">
                     <a class="nav-link {% if current == 'register' %}disabled{% endif %}" href="{{ url_for('catalog') }}">Catalog</a>
+                </li>
+                <li class="nav-item {% if current == 'items' %}active{% endif %}">
+                    <a class="nav-link {% if current == 'register' %}disabled{% endif %}" href="{{ url_for('items') }}">My Items</a>
                 </li>
                 </ul>
             </div>

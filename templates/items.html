@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>My Items</title>
+  </head>
+  <body>
+    {% extends "template.html" %}
+    {% block content %}
+    
+    <div class="row justify-content-md-center" style="margin-bottom:20px; margin-top: 20px">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <form action="/register-item">
+              <div class="input-group mb-3">
+                <input type="text" name="isbn" class="form-control" placeholder="ISBN Number">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                      Register Book
+                    </button>
+                </div>
+              </div>
+            </form>
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Register Book</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    ...
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <table class="table table-hover" id="catalog_view"">
+                <thead>
+                    <tr>
+                    <th scope="col">ISBN</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Status</th>
+                    <th scope="col"></th>
+                    <th scope="col">Possession</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                    <tr>
+                        <th scope="row">{{book.isbn}}</th>
+                        <td>{{book.title}}</td>
+                        <td>{{book.status}}</td>
+                        <td><img src="{{book.image}}" class="img-thumbnail img-fluid" style="max-width: 50px; max-height: 50px;"></td>
+                        <td>{{book.possession}}</td>
+                    </tr>
+                    {% endfor %}  
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+      
+    {% endblock %}
+  </body>
+</html>

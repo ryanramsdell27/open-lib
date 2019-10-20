@@ -9,7 +9,8 @@
     {% block content %}
 
     <div class="row justify-content-md-center" style="margin-bottom:20px; margin-top: 20px">
-            <div class="col col-lg-6">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
                 <div class="input-group flex-nowrap">
                     <!-- <div class="input-group-prepend">
                         <span class="input-group-text" id="addon-wrapping">@</span>
@@ -17,17 +18,20 @@
                     <input type="text" class="form-control" id="catalog_input" onkeyup="searchCatalog()" placeholder="Search for books..." aria-label="Username" aria-describedby="addon-wrapping">
                 </div>
             </div>
+            <div class="col-sm-2"></div>
         </div>
     <div class="row justify-content-md-center">
-        <div class="col-md-auto">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
             <table class="table table-hover" id="catalog_view"">
                 <thead>
                     <tr>
-                    <th scope="col">ISBN</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Author</th>
-                    <th scope="col">Publisher</th>
-                    <th scope="col"></th>
+                        <th scope="col">ISBN</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Author</th>
+                        <th scope="col">Publisher</th>
+                        <th scope="col"></th>
+                        <th scope="col">Request</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,6 +47,7 @@
                 </tbody>
             </table>
         </div>
+        <div class="col-sm-2"></div>
     </div>
 
     <script>

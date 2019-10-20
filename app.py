@@ -1,36 +1,12 @@
 from flask import Flask, render_template, request, make_response, redirect, url_for
 from pymongo import MongoClient
 import utils, jwt
-import register_user
+import register_user, register_item
 import populate_db
 
 app = Flask(__name__)
 
 @app.route("/")
-def home():
-    if request.cookies.get('TOKEN') == None:
-        return redirect('/register')
-    decoded = jwt.decode(request.cookies.get('TOKEN'), 'secret', algorithms=['HS256'])
-    if decoded == None:
-        resp = make_response(redirect('/register'))
-        resp.set_cookie('TOKEN', '', expires=0)
-        return resp
-
-    return render_template("home.html", current='home')
-    
-@app.route("/about")
-def about():
-    if request.cookies.get('TOKEN') == None:
-        return redirect('/register')
-    decoded = jwt.decode(request.cookies.get('TOKEN'), 'secret', algorithms=['HS256'])
-    if decoded == None:
-        resp = make_response(redirect('/register'))
-        resp.set_cookie('TOKEN', '', expires=0)
-        return resp
-
-    return render_template("about.html", current='about')
-
-@app.route("/catalog")
 def catalog():
     if request.cookies.get('TOKEN') == None:
         return redirect('/register')
@@ -41,6 +17,36 @@ def catalog():
         return resp
 
     return render_template("catalog.html", books=utils.get_books(), current='catalog')
+
+@app.route("/items")
+def items():
+    if request.cookies.get('TOKEN') == None:
+        return redirect('/register')
+    decoded = jwt.decode(request.cookies.get('TOKEN'), 'secret', algorithms=['HS256'])
+    if decoded == None:
+        resp = make_response(redirect('/register'))
+        resp.set_cookie('TOKEN', '', expires=0)
+        return resp
+
+    return render_template("items.html", current='items', books=utils.get_user_items(register_user.get_user_id(decoded['email'])))
+
+@app.route("/register-item")
+def registerItem():
+    if request.cookies.get('TOKEN') == None:
+        return redirect('/register')
+    decoded = jwt.decode(request.cookies.get('TOKEN'), 'secret', algorithms=['HS256'])
+    if decoded == None:
+        resp = make_response(redirect('/register'))
+        resp.set_cookie('TOKEN', '', expires=0)
+        return resp
+
+    isbn = request.args.get("isbn")
+    if isbn == None:
+        return redirect('/items')
+
+    register_item.register_item(isbn, register_user.get_user_id(decoded['email']))
+
+    return redirect('/items')
 
 @app.route("/register")
 def register():

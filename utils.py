@@ -12,6 +12,28 @@ events = db.events
 def get_books():
     return books.find()
 
+def get_user_items(id):
+    items = catalog.find({'owner': id})
+    output = []
+    for item in items:
+        book = books.find_one({'_id': item['item_id']})
+        owner = users.find_one({'_id': item['owner']})
+        possession = users.find_one({'_id': item['possession']})
+        output.append(
+            {
+                'isbn': book['isbn'],
+                'title': book['title'],
+                'publisher': book['publisher'],
+                'author': book['author'],
+                'image': book['image'],
+                'owner': owner['name'],
+                'possession': possession['name'],
+                'status': item['status']
+            }
+        )
+        
+    return output
+
 def get_isbn(isbn: str) -> dict:
     payload = {
         'q': 'isbn:' + isbn

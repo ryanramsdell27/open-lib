@@ -30,6 +30,18 @@ def items():
 
     return render_template("items.html", current='items', books=utils.get_user_items(register_user.get_user_id(decoded['email'])))
 
+@app.route("/pending")
+def pending():
+    if request.cookies.get('TOKEN') == None:
+        return redirect('/register')
+    decoded = jwt.decode(request.cookies.get('TOKEN'), 'secret', algorithms=['HS256'])
+    if decoded == None:
+        resp = make_response(redirect('/register'))
+        resp.set_cookie('TOKEN', '', expires=0)
+        return resp
+
+    return render_template("pending.html", current='pending')
+
 @app.route("/register-item")
 def registerItem():
     if request.cookies.get('TOKEN') == None:

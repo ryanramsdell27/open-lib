@@ -31,24 +31,77 @@
                         <th scope="col">Author</th>
                         <th scope="col">Publisher</th>
                         <th scope="col"></th>
-                        <th scope="col">Request</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for book in books %}
-                    <tr>
+                    <form action="/request" method="get">
+                    <tr class="clickable-row" data-toggle="modal" data-target=".bd-{{book.isbn}}-modal-lg">
                         <th scope="row">{{book.isbn}}</th>
                         <td>{{book.title}}</td>
                         <td>{{book.author}}</td>
                         <td>{{book.publisher}}</td>
                         <td><img src="{{book.image}}" class="img-thumbnail img-fluid" style="max-width: 50px; max-height: 50px;"></td>
+                        <input type="hidden" name="owner" value="{{book.owner}}">
+                        <input type="hidden" name="isbn" value="{{book.isbn}}">
+                        <td><button type="submit" class="btn btn-outline-dark">Request</button></td>
                     </tr>
+                    </form>
                     {% endfor %}  
                 </tbody>
             </table>
         </div>
         <div class="col-sm-2"></div>
     </div>
+
+    {% for book in books %}
+    <div class="modal fade bd-{{book.isbn}}-modal-lg" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="media">
+                    <img src="{{book.image}}" class="mr-3" style="max-width: 4em">
+                    <div class="media-body">
+                    <h5 class="mt-0 card-title">{{book.title}}</h5>
+                    
+                    </div>
+                </div>
+                <div class="row justify-content-md-center">
+                    <div class="col-md-2 col-sm"></div>
+                    <div class="col-md-8 col-sm"> 
+                    <table class="table table-sm">
+                    <tbody>
+                        <tr>
+                        <td>ISBN</td>
+                        <td>{{book.isbn}}</td>
+                        </tr>
+                        <tr>
+                        <td>Author</td>
+                        <td>{{book.author}}</td>
+                        </tr>
+                        <tr>
+                        <td>Publisher</td>
+                        <td>{{book.publisher}}</td>
+                        </tr>
+                    </tbody>
+                    </table>
+                    </div>
+                    <div class="col-md-2 col-sm"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Request</button>
+            </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 
     <script>
         function searchCatalog() {
@@ -72,8 +125,8 @@
             }
             }
         }
-        </script>
-    
+    </script>
+
     {% endblock %}
   </body>
 </html>

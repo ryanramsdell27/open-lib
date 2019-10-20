@@ -8,6 +8,7 @@ books = db.books
 catalog = db.catalog
 users = db.users
 events = db.events
+pending_transactions = db.pending_transactions
 
 def get_books():
     return books.find()

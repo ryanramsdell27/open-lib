@@ -8,7 +8,7 @@
     {% extends "template.html" %}
     {% block content %}
     
-    <div class="row justify-content-md-center" style="margin-bottom:20px; margin-top: 20px">
+    <div class="row justify-content-md-center" style="margin-bottom:2em; margin-top: 2em">
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
             <form action="/register-item">
@@ -58,7 +58,7 @@
                 </thead>
                 <tbody>
                     {% for book in books %}
-                    <tr>
+                    <tr class="clickable-row" data-toggle="modal" data-target=".bd-{{book.isbn}}-modal-lg">
                         <th scope="row">{{book.isbn}}</th>
                         <td>{{book.title}}</td>
                         <td>{{book.status}}</td>
@@ -71,6 +71,28 @@
         </div>
         <div class="col-sm-2"></div>
     </div>
+
+    {% for book in books %}
+    <div class="modal fade bd-{{book.isbn}}-modal-lg" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">{{book.title}}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}  
       
     {% endblock %}
   </body>

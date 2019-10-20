@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Pending</title>
+  </head>
+  <body>
+    {% extends "template.html" %}
+    {% block content %}
+    
+    <div class="row justify-content-md-center" style="margin-bottom:2em; margin-top: 2em">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-2 col-sm"></div>
+        <div class="col-md-8 col-sm">
+          <div class="card" style="width: 22rem;">
+            <div class="card-body">
+              <div class="media">
+                  <img src="http://books.google.com/books/content?id=gu4JXBTxjhgC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api" class="mr-3" style="max-width: 4em">
+                  <div class="media-body">
+                    <h5 class="mt-0 card-title">The Overspent American</h5>
+                    Why we want what we don't need
+                  </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-borderless table-sm">
+                  <tbody>
+                    <tr>
+                      <td>Borrower</td>
+                      <td>Payton Garland</td>
+                    </tr>
+                    <tr>
+                      <td>ISBN</td>
+                      <td>1233456</td>
+                    </tr>
+                    <tr>
+                      <td>Due</td>
+                      <td>08-24-2020</td>
+                    </tr>
+                  </tbody>
+                </table>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Enter verification code</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2 col-sm"></div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Enter verification code</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+            <div class="modal-body" style=".row {text-align: center}">
+                <input type="hidden" name="formType" value="confirmPassword">
+                <div class="form-group">
+                    <div class="col-sm-5 text-center">
+                        <input name="firstdigit" class="digit text-center" type="password" required id="firstdigit" size="1" maxlength="1" tabindex="0">
+                        <input name="secondtdigit" class="digit text-center" type="password" required id="firstdigit" size="1" maxlength="1" tabindex="1">
+                        <input name="thirddigit" class="digit text-center" type="password" required id="thirddigit" size="1" maxlength="1"  tabindex="2" >
+                        <input name="fourthdigit" class="digit text-center" type="password" required id="fourthdigit" size="1" maxlength="1" tabindex="3">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Verify</button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      
+    
+
+    {% endblock %}
+  </body>
+</html>

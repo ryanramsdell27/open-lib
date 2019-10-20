@@ -60,6 +60,9 @@ def get_user_items(id):
         
     return output
 
+def get_pending_transaction(code_recipient):
+    return pending_transactions.find_one({'code_recipient': code_recipient})
+
 def get_isbn(isbn: str) -> dict:
     payload = {
         'q': 'isbn:' + isbn

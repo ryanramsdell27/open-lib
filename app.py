@@ -96,6 +96,21 @@ def verifyTransaction():
     if code == None:
         return redirect('/pending')
 
+    code_recipient = register_user.get_user_id(decoded['email'])
+
+    transaction = utils.get_pending_transaction(code_recipient)
+
+    pprint.pprint(transaction)
+    print(code)
+
+    # if (code == transaction['verification_code']):
+    #     print("VALIDATED")
+    # else:
+    #     print("NOT VALID")
+
+    events.event_transaction(transaction['event_token'])
+    
+
     return redirect('/items')
 
 @app.route("/cancel")

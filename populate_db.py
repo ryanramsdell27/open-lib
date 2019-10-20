@@ -1,10 +1,6 @@
 from pymongo import MongoClient
 import register_item
-
-client = MongoClient()
-db = client.lib
-books = db.books
-catalog = db.catalog
+from utils import books, catalog
 
 def populate_db():
     isbns = [
@@ -18,3 +14,5 @@ def populate_db():
 
     for isbn in isbns:
         register_item.register_item(isbn, 1)
+
+populate_db()

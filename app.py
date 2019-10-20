@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from register_item import register_item
+from pymongo import MongoClient
 import utils
 import populate_db
 

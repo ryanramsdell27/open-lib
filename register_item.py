@@ -1,11 +1,7 @@
 from pymongo import MongoClient
 from pprint import pprint
 import utils
-
-client = MongoClient()
-db = client.lib
-books = db.books
-catalog = db.catalog
+from utils import books, catalog
 
 
 class Book:
@@ -49,8 +45,8 @@ def register_item(isbn, owner_id):
 
 
 # Clear the db
-books.drop()
-catalog.drop()
+# books.drop()
+# catalog.drop()
 
 # isbn_test = "9788373191723"
 # owner_id_test = 99383

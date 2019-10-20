@@ -1,13 +1,7 @@
 from datetime import datetime
 from pymongo import MongoClient
 from pprint import pprint
-
-client = MongoClient()
-db = client.lib
-books = db.books
-catalog = db.catalog
-users = db.users
-events = db.events
+from utils import books, catalog, users, events
 
 DEFAULT_LOAN_PERIOD = 21
 

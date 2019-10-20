@@ -1,11 +1,6 @@
 from pymongo import MongoClient
 from pprint import pprint
-
-client = MongoClient()
-db = client.lib
-books = db.books
-catalog = db.catalog
-users = db.users
+from utils import books, catalog, users
 
 
 # Returns the user id associated with an email

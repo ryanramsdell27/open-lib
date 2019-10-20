@@ -13,6 +13,9 @@ pending_transactions = db.pending_transactions
 def get_book(isbn):
     return books.find_one({'isbn': isbn})
 
+def get_catalog_item(isbn, owner_id):
+    return catalog.find_one({'item_id': get_book(isbn)['_id'], 'owner': owner_id})
+
 def get_catalog_items():
     items = catalog.find({})
     output = []

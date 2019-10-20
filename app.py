@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, make_response, redirect, url_for
 from pymongo import MongoClient
 import utils, jwt
-import register_user, register_item, events
+import register_user, register_item, events, pprint
 
 app = Flask(__name__)
 
@@ -64,6 +64,57 @@ def registerItem():
     register_item.register_item(isbn, register_user.get_user_id(decoded['email']))
 
     return redirect('/items')
+
+@app.route("/unregister-item")
+def unregisterItem():
+    if request.cookies.get('TOKEN') == None:
+        return redirect('/register')
+    decoded = jwt.decode(request.cookies.get('TOKEN'), 'secret', algorithms=['HS256'])
+    if decoded == None:
+        resp = make_response(redirect('/register'))
+        resp.set_cookie('TOKEN', '', expires=0)
+        return resp
+
+    isbn = request.args.get("isbn")
+    if isbn == None:
+        return redirect('/items')
+
+    owner = register_user.get_user_id(decoded['email'])
+    pprint.pprint(owner)
+    catalog_item = utils.get_catalog_item(isbn, owner)
+    pprint.pprint(catalog_item)
+
+    register_item.deregister_item(catalog_item['_id'])
+
+    return redirect('/items')
+
+@app.route("/verify")
+def verifyTransaction():
+    if request.cookies.get('TOKEN') == None:
+        return redirect('/register')
+    decoded = jwt.decode(request.cookies.get('TOKEN'), 'secret', algorithms=['HS256'])
+    if decoded == None:
+        resp = make_response(redirect('/register'))
+        resp.set_cookie('TOKEN', '', expires=0)
+        return resp
+
+    code = request.args.get("code")
+    if code == None:
+        return redirect('/pending')
+
+    return redirect('/items')
+
+@app.route("/cancel")
+def cancelTransaction():
+    if request.cookies.get('TOKEN') == None:
+        return redirect('/register')
+    decoded = jwt.decode(request.cookies.get('TOKEN'), 'secret', algorithms=['HS256'])
+    if decoded == None:
+        resp = make_response(redirect('/register'))
+        resp.set_cookie('TOKEN', '', expires=0)
+        return resp
+
+    return redirect('/pending')
 
 @app.route("/request")
 def requestItem():

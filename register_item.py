@@ -45,9 +45,9 @@ def register_item(isbn, owner_id):
 
 # if an item is available it is deleted from catalog
 def deregister_item(item_id):
-    item = catalog.find_one({'item_id': item_id})
+    item = catalog.find_one({'_id': item_id})
     if item.get('status') == STATUS_AVAILABLE:
-        catalog.delete_one({'item_id': item_id})
+        catalog.delete_one({'_id': item_id})
 
 # Clear the db
 # books.drop()

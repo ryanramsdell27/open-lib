@@ -114,28 +114,28 @@ def event_cancel(borrower_id, item_id):
     pending_transactions.delete_one({'event_token': last_event.get('_id')})
     # TODO notify borrower of cancel
 
-events.drop()
-catalog.drop()
-pending_transactions.drop()
-isbn_test = "9788373191723"
-owner_id_test = 99383
-from register_item import register_item
-register_item(isbn_test, owner_id_test)
+# events.drop()
+# catalog.drop()
+# pending_transactions.drop()
+# isbn_test = "9788373191723"
+# owner_id_test = 99383
+# from register_item import register_item
+# register_item(isbn_test, owner_id_test)
 
-test_user = users.find_one()
-test_item = catalog.find_one()
-event_request(test_user.get('_id'), test_item.get('item_id'))
-event_cancel(test_user.get('_id'), test_item.get('item_id'))
+# test_user = users.find_one()
+# test_item = catalog.find_one()
+# event_request(test_user.get('_id'), test_item.get('item_id'))
+# event_cancel(test_user.get('_id'), test_item.get('item_id'))
 
-print("Before:")
-pprint(test_item)
-verify = event_request(test_user.get('_id'), test_item.get('item_id'))
-verify = event_transaction(verify)
-print("After:")
-pprint(catalog.find_one({'_id': test_item.get('_id')}))
-event_transaction(verify)
-print("After2:")
-pprint(catalog.find_one({'_id': test_item.get('_id')}))
+# print("Before:")
+# pprint(test_item)
+# verify = event_request(test_user.get('_id'), test_item.get('item_id'))
+# verify = event_transaction(verify)
+# print("After:")
+# pprint(catalog.find_one({'_id': test_item.get('_id')}))
+# event_transaction(verify)
+# print("After2:")
+# pprint(catalog.find_one({'_id': test_item.get('_id')}))
 
-for trans in pending_transactions.find():
-    pprint(trans)
+# for trans in pending_transactions.find():
+#     pprint(trans)

@@ -32,7 +32,6 @@ class Book:
         entry = self.__dict__
         return books.insert_one(entry).inserted_id
 
-
 def register_item(isbn, owner_id):
     item_id = Book(isbn).id
 

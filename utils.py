@@ -10,8 +10,30 @@ users = db.users
 events = db.events
 pending_transactions = db.pending_transactions
 
-def get_books():
-    return books.find()
+def get_book(isbn):
+    return books.find_one({'isbn': isbn})
+
+def get_catalog_items():
+    items = catalog.find({})
+    output = []
+    for item in items:
+        if item['status'] == 'available':
+            book = books.find_one({'_id': item['item_id']})
+            owner = users.find_one({'_id': item['owner']})
+            possession = users.find_one({'_id': item['possession']})
+            output.append(
+                {
+                    'isbn': book['isbn'],
+                    'title': book['title'],
+                    'publisher': book['publisher'],
+                    'author': book['author'],
+                    'image': book['image'],
+                    'owner': owner['email'],
+                    'possession': possession['name'],
+                    'status': item['status']
+                }
+            )
+    return output
 
 def get_user_items(id):
     items = catalog.find({'owner': id})

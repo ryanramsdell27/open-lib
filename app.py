@@ -1,8 +1,7 @@
 from flask import Flask, render_template, request, make_response, redirect, url_for
 from pymongo import MongoClient
 import utils, jwt
-import register_user, register_item
-import populate_db
+import register_user, register_item, events
 
 app = Flask(__name__)
 
@@ -16,7 +15,7 @@ def catalog():
         resp.set_cookie('TOKEN', '', expires=0)
         return resp
 
-    return render_template("catalog.html", books=utils.get_books(), current='catalog')
+    return render_template("catalog.html", books=utils.get_catalog_items(), current='catalog')
 
 @app.route("/items")
 def items():
@@ -60,6 +59,25 @@ def registerItem():
 
     return redirect('/items')
 
+@app.route("/request")
+def requestItem():
+    if request.cookies.get('TOKEN') == None:
+        return redirect('/register')
+    decoded = jwt.decode(request.cookies.get('TOKEN'), 'secret', algorithms=['HS256'])
+    if decoded == None:
+        resp = make_response(redirect('/register'))
+        resp.set_cookie('TOKEN', '', expires=0)
+        return resp
+
+    isbn = request.args.get("isbn")
+    owner = request.args.get("owner")
+    if isbn == None or owner == None:
+        return redirect('/')
+
+    events.event_request(register_user.get_user_id(owner), utils.get_book(isbn)['_id'])
+
+    return redirect('/pending')
+
 @app.route("/register")
 def register():
     name = request.args.get("name")
@@ -79,5 +97,4 @@ def register():
     return render_template("register.html", current='register')
     
 if __name__ == "__main__":
-    populate_db.populate_db()
     app.run(debug=True)

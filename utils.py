@@ -48,12 +48,14 @@ def get_pending_codes(code_owner):
                 {
                     'event_token': transaction.get('event_token'),
                     'verification_code': transaction.get('verification_code'),
+                    'image': books.find_one({'_id': book_id}).get('image'),
                     'code_owner': transaction.get('code_owner'),
                     'code_recipient': transaction.get('code_recipient'),
                     'code_owner_name': users.find_one({'_id': transaction.get('code_owner')}).get('name'),
                     'code_recipient_name': users.find_one({'_id': transaction.get('code_recipient')}).get('name'),
                     'code_owner_email': users.find_one({'_id': transaction.get('code_owner')}).get('email'),
                     'code_recipient_email': users.find_one({'_id': transaction.get('code_recipient')}).get('email'),
+                    'item_author': books.find_one({'_id': book_id}).get('author'),
                     'item_title': books.find_one({'_id': book_id}).get('title')
                 }
             )
@@ -70,12 +72,14 @@ def get_pending_verifications(code_recipient):
                 {
                     'event_token': transaction.get('event_token'),
                     'verification_code': transaction.get('verification_code'),
+                    'image': books.find_one({'_id': book_id}).get('image'),
                     'code_owner': transaction.get('code_owner'),
                     'code_recipient': transaction.get('code_recipient'),
                     'code_owner_name': users.find_one({'_id': transaction.get('code_owner')}).get('name'),
                     'code_recipient_name': users.find_one({'_id': transaction.get('code_recipient')}).get('name'),
                     'code_owner_email': users.find_one({'_id': transaction.get('code_owner')}).get('email'),
                     'code_recipient_email': users.find_one({'_id': transaction.get('code_recipient')}).get('email'),
+                    'item_author': books.find_one({'_id': book_id}).get('author'),
                     'item_title': books.find_one({'_id': book_id}).get('title')
                 }
             )

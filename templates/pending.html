@@ -20,19 +20,22 @@
             <div class="col-md-3">
                 <div class="card" style="width: 22rem;">
                     <div class="card-body">
+                        <div class="media">
+                            <img src="{{transaction.image}}" class="mr-3" style="max-width: 4em">
+                            <div class="media-body">
+                              <h5 class="mt-0 card-title">{{transaction.item_title}}</h5>
+                              By {{transaction.item_author}}
+                            </div>
+                          </div>
                         <table class="table table-borderless table-sm">
                             <tbody>
-                            <tr>
-                                <td>Item</td>
-                                <td>{{transaction.item_title}}</td>
-                            </tr>
                             <tr>
                                 <td>Transaction with</td>
                                 <td>{{transaction.code_recipient_name}}</td>
                             </tr>
                             <tr>
                                 <td>Verification code</td>
-                                <td>{{transaction.verification_code}}</td>
+                                <td><span class="badge badge-danger">{{transaction.verification_code}}</span></td>
                             </tr>
                             </tbody>
                         </table>
@@ -41,22 +44,34 @@
             </div>
             {% endfor %}
             {% for transaction in pending_verifies %}
-            <div class="col-md-1">
+            <div class="col-md-3">
                 <div class="card" style="width: 22rem;">
                     <div class="card-body">
+                        <div class="media">
+                          <img src="{{transaction.image}}" class="mr-3" style="max-width: 4em">
+                          <div class="media-body">
+                            <h5 class="mt-0 card-title">{{transaction.item_title}}</h5>
+                            By {{transaction.item_author}}
+                          </div>
+                        </div>
                         <table class="table table-borderless table-sm">
                             <tbody>
-                            <tr>
-                                <td>Item</td>
-                                <td>{{transaction.item_title}}</td>
-                            </tr>
                             <tr>
                                 <td>Transaction with</td>
                                 <td>{{transaction.code_owner_name}}</td>
                             </tr>
                             <tr>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Enter verification code</button>
-                            </tr>
+                                <form action="/verify">
+                                  <div class="input-group mb-3">
+                                    <input type="text" name="code" class="form-control" placeholder="">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-danger">
+                                          Verification Code
+                                        </button>
+                                    </div>
+                                  </div>
+                                </form>
+                            </tr> 
                             </tbody>
                         </table>
                     </div>

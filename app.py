@@ -168,5 +168,5 @@ def register():
 
     return render_template("register.html", current='register')
     
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')

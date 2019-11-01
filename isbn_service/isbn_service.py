@@ -26,25 +26,27 @@ class ISBNService:
 
     def lookup(self, isbn: str) -> Book:
         isbn = format_isbn(isbn)
-
         validate_isbn(isbn)
+
+        # ISBN information sources by priority - cache should always be checked first
+        isbn_sources = [self.google_books, self.open_library]
 
         # Check cache
         book = self.database_driver.lookup(isbn)
 
-        # Check 3rd party if non-existent
-        if book is None:
-            try:
-                # Check primary source
-                book = self.google_books.lookup(isbn)
-            except ISBNNotFound:
+        if book is not None:
+            # Cache hit
+            return book
+        else:
+            # Cache miss - lookup on each source and exit on first success
+            for isbn_source in isbn_sources:
                 try:
-                    # Check secondary source
-                    book = self.open_library.lookup(isbn)
-                except ISBNNotFound:
-                    return None
+                    book = isbn_source.lookup(isbn)
 
-            # Update cache
-            self.database_driver.insert(book)
+                    # Update cache
+                    self.database_driver.insert(book)
+                    break
+                except ISBNNotFound:
+                    book = None
 
         return book

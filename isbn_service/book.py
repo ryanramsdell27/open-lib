@@ -1,6 +1,7 @@
 import pprint
 
 class Book:
+    oid: str
     isbn: str
     title: str
     subtitle: str
@@ -12,7 +13,8 @@ class Book:
     image_links: [str]
 
     def __init__(self, isbn: str, title: str, subtitle: str, authors: [str], publisher: str, publisher_date: str,
-                 description: str, page_count: str, image_links: [str]):
+                 description: str, page_count: str, image_links: [str], oid: str = None):
+        self.oid = oid
         self.isbn = isbn
         self.title = title
         self.subtitle = subtitle

@@ -1,12 +1,15 @@
 from pymongo import MongoClient
 from isbn_service.book import Book
-from isbn_service.exceptions import ISBNNotFound
 
 
 class DatabaseDriver:
 
-    def __init__(self):
-        self.client = MongoClient()
+    def __init__(self, username: str, password: str):
+        self.client = MongoClient("mongodb+srv://" +
+                                  username +
+                                  ":" +
+                                  password +
+                                  "@cluster0-1ftoj.mongodb.net/test?retryWrites=true&w=majority")
         self.db = self.client.lib
         self.books = self.db.books
         self.catalog = self.db.catalog
@@ -22,6 +25,7 @@ class DatabaseDriver:
         )
         if book is not None:
             return Book(
+                oid=book.get("_id", ""),
                 isbn=isbn,
                 title=book.get("title", ""),
                 subtitle=book.get("subtitle", ""),
@@ -32,7 +36,7 @@ class DatabaseDriver:
                 page_count=book.get("page_count", ""),
                 image_links=book.get("image_links", [])
             )
-        raise ISBNNotFound
+        return book
 
     def insert(self, book: Book):
         self.books.insert_one(book.__dict__)

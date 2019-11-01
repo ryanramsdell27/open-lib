@@ -8,6 +8,7 @@ isbn_service/
 ├── isbn_service.py
 ├── google_books_api.py
 ├── cache.py
+├── book.py
 ├── exceptions.py
 └── tests/
     ├── unit/
@@ -22,15 +23,14 @@ The goal of this service is to require the user only use a single function from 
 `ISBNService` will handle prioritizing lookup databases and cache along with failure, input validation, 
 and any other issues resulting from 3rd party 
 interaction.
+
+The following environment variables must be set: `MONGODB_USERNAME`, `MONGODB_PASSWORD`, `GOOGLE_BOOKS_API_KEY`
 ```python
 from isbn_service.isbn_service import ISBNService
-from isbn_service.exceptions import ISBNNotFound, InvalidISBN
 
-isbn_service = ISBNService("GOOGLE_BOOKS_API_KEY")
-try:
-    book = isbn_service.lookup("1234567890")
-except ISBNNotFound:
-    # Handle exception
-except InvalidISBN:
-    # Handle exception
+isbn_service = ISBNService()
+
+book = isbn_service.lookup("1234567890")
+if book is None:
+    # Handle invalid ISBN
 ```

@@ -4,6 +4,7 @@ from database.database import DatabaseDriver
 from .exceptions import InvalidISBN, ISBNNotFound
 from .google_books_api import GoogleBooksAPI
 from .book import Book
+from environment import GOOGLE_BOOKS_API_KEY, MONGODB_USERNAME, MONGODB_PASSWORD
 
 
 def format_isbn(isbn: str):
@@ -14,15 +15,12 @@ def validate_isbn(isbn: str):
     if len(isbn) != 13 and len(isbn) != 10:
         raise InvalidISBN
 
-    # if not re.match('[^0-9]', isbn):
-    #     raise InvalidISBN
-
 
 class ISBNService:
 
-    def __init__(self, google_books_api_key: str):
-        self.database_driver = DatabaseDriver()
-        self.google_books = GoogleBooksAPI(google_books_api_key)
+    def __init__(self):
+        self.database_driver = DatabaseDriver(MONGODB_USERNAME, MONGODB_PASSWORD)
+        self.google_books = GoogleBooksAPI(GOOGLE_BOOKS_API_KEY)
 
     def lookup(self, isbn: str) -> Book:
         isbn = format_isbn(isbn)
@@ -34,13 +32,14 @@ class ISBNService:
 
         # Check 3rd party if non-existent
         if book is None:
-            # TODO: Check secondary source
             try:
+                # Check primary source
                 book = self.google_books.lookup(isbn)
             except ISBNNotFound:
+                # TODO: Check secondary source
                 return None
-            # TODO: Check ...
 
+            # Update cache
             self.database_driver.insert(book)
 
         return book

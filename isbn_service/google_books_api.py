@@ -26,6 +26,7 @@ class GoogleBooksAPI:
             raise ISBNNotFound
 
         volume_info = r.json()["items"][0].get("volumeInfo", {})
+        image_links = volume_info.get("imageLinks", {})
 
         return Book(
             isbn=isbn,
@@ -36,5 +37,5 @@ class GoogleBooksAPI:
             publisher_date=volume_info.get("publisherDate", ""),
             description=volume_info.get("description", ""),
             page_count=volume_info.get("pageCount", ""),
-            image_links=volume_info.get("imageLinks", [])
+            image_links=[i for i in image_links.values()]
         )

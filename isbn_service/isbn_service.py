@@ -3,6 +3,7 @@ import re
 from database.database import DatabaseDriver
 from .exceptions import InvalidISBN, ISBNNotFound
 from .google_books_api import GoogleBooksAPI
+from .open_library_api import OpenLibraryAPI
 from .book import Book
 from environment import GOOGLE_BOOKS_API_KEY, MONGODB_USERNAME, MONGODB_PASSWORD
 
@@ -21,6 +22,7 @@ class ISBNService:
     def __init__(self):
         self.database_driver = DatabaseDriver(MONGODB_USERNAME, MONGODB_PASSWORD)
         self.google_books = GoogleBooksAPI(GOOGLE_BOOKS_API_KEY)
+        self.open_library = OpenLibraryAPI()
 
     def lookup(self, isbn: str) -> Book:
         isbn = format_isbn(isbn)
@@ -36,8 +38,11 @@ class ISBNService:
                 # Check primary source
                 book = self.google_books.lookup(isbn)
             except ISBNNotFound:
-                # TODO: Check secondary source
-                return None
+                try:
+                    # Check secondary source
+                    book = self.open_library.lookup(isbn)
+                except ISBNNotFound:
+                    return None
 
             # Update cache
             self.database_driver.insert(book)

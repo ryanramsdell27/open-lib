@@ -1,6 +1,6 @@
 import re
 
-from database.database import DatabaseDriver
+from database.database_driver import DatabaseDriver
 from .exceptions import InvalidISBN, ISBNNotFound
 from .google_books_api import GoogleBooksAPI
 from .open_library_api import OpenLibraryAPI

@@ -7,13 +7,13 @@ Thousands of textbooks are purchased for a semester, used lightly, and left in a
 ## What it does
 Open Lib is a communal, distributed library. Users can register, post books, and request books with a physical transaction layer that asserts an exchange has occurred between users. Books can be added or removed from the library at a whim and are unavailable while a physical transaction is pending.
 
-## How I built it
+## How we built it
 Open Lib was built with Flask, MongoDB, and Bootstrap. Sessions are securely stored in Json Web Tokens allowing persistent user interaction.
 
-## Challenges I ran into and learned from
+## Challenges we ran into and learned from
 We were both inexperienced in MongoDB and Flask, so there were plenty of things to learn. The biggest challenge came from planning when deciding how detailed we should be before the implementation step. We learned it's better to be articulate with our planning to avoid later confusion during implementation. This meant defining tables, user flows, actions, etc.
 
-## Accomplishments that I'm proud of
+## Accomplishments that we're proud of
 We're incredibly proud of the end result. We were able to smoothly collaborate and divide work such that there were no major dependencies between our jobs. It is safe to say we ended with an MVP.
 
 ## What's next for Open Lib
